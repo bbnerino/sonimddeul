@@ -11,7 +11,6 @@ import {
   Zap,
   Leaf,
   Clock,
-  Pencil,
   Shield,
 } from "lucide-react";
 import { useState } from "react";
@@ -83,7 +82,7 @@ const TonePage = () => {
     if (!selectedToneId) {
       return;
     }
-    router.push("/new/tone");
+    router.push("/new/submit");
   };
 
   const [selectedToneId, setSelectedToneId] = useState<number | null>(null);
