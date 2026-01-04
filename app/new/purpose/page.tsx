@@ -14,7 +14,7 @@ import StepNavigation from "@/app/components/step-navigation";
 import Stepper from "@/app/components/stepper";
 import { useRouter } from "next/navigation";
 import PurposeCard from "./purpose-card";
-import { useMessageStore, Purpose, KPI } from "@/app/store/message-store";
+import { useMessageStore, Purpose } from "@/app/store/message-store";
 
 const PurposePage = () => {
   const purposes = [
@@ -48,8 +48,7 @@ const PurposePage = () => {
     },
   ];
 
-  const { purpose, setPurpose, kpis, setKpis, date, setDate } =
-    useMessageStore();
+  const { purpose, setPurpose, kpi, setKpi } = useMessageStore();
 
   const availableKpis = [
     {
@@ -135,17 +134,17 @@ const PurposePage = () => {
           </div>
           <div className="bg-white rounded-xl p-6 border border-gray-200">
             <div className="grid grid-cols-2 gap-4">
-              {availableKpis.map((kpi) => {
-                const isSelected = kpis.some((k) => k.id === kpi.id);
+              {availableKpis.map((kpiItem) => {
+                const isSelected = kpi?.id === kpiItem?.id;
                 return (
                   <div
-                    key={kpi.id}
+                    key={kpiItem?.id}
                     className="flex items-start gap-3 p-4 rounded-lg cursor-pointer hover:bg-gray-50 transition-colors"
                     onClick={() => {
                       if (isSelected) {
-                        setKpis(kpis.filter((k) => k.id !== kpi.id));
+                        setKpi(null);
                       } else {
-                        setKpis([...kpis, kpi]);
+                        setKpi(kpiItem);
                       }
                     }}
                   >
@@ -174,10 +173,10 @@ const PurposePage = () => {
                     {/* 텍스트 */}
                     <div className="flex flex-col gap-1 mt-[-2px]">
                       <div className="font-semibold text-gray-600">
-                        {kpi.acronym} ({kpi.fullName})
+                        {kpiItem?.acronym} ({kpiItem?.fullName})
                       </div>
                       <div className="text-sm text-gray-500">
-                        {kpi.description}
+                        {kpiItem?.description}
                       </div>
                     </div>
                   </div>

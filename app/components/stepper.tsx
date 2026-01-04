@@ -8,7 +8,7 @@ const steps = [
   { number: 2, label: "메시지 목적", path: "/new/purpose" },
   { number: 3, label: "메시지 톤 및 매너", path: "/new/tone" },
   { number: 4, label: "메시지 정보 입력", path: "/new/info" },
-  { number: 5, label: "메시지 발송", path: "/new/submit" },
+  { number: 5, label: "메시지 생성", path: "/new/submit" },
 ];
 
 interface StepperProps {

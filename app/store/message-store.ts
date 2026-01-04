@@ -28,8 +28,8 @@ interface MessageStore {
   // Purpose
   purpose: Purpose | null;
   setPurpose: (purpose: Purpose | null) => void;
-  kpis: KPI[];
-  setKpis: (kpis: KPI[]) => void;
+  kpi: KPI | null;
+  setKpi: (kpi: KPI | null) => void;
   date: string;
   setDate: (date: string) => void;
 
@@ -51,8 +51,8 @@ export const useMessageStore = create<MessageStore>((set) => ({
   // Purpose
   purpose: null,
   setPurpose: (purpose) => set({ purpose }),
-  kpis: [],
-  setKpis: (kpis) => set({ kpis }),
+  kpi: null,
+  setKpi: (kpi) => set({ kpi }),
   date: "",
   setDate: (date) => set({ date }),
 
@@ -67,7 +67,7 @@ export const useMessageStore = create<MessageStore>((set) => ({
     set({
       persona: null,
       purpose: null,
-      kpis: [],
+      kpi: null,
       date: "",
       tone: null,
       additionalRequests: "",
