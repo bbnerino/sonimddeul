@@ -1,8 +1,19 @@
 "use client";
 import NewTitle from "@/app/components/new-title";
 import DatePicker from "@/app/components/date-picker";
-import { BarChart3, Calendar, Flag } from "lucide-react";
+import {
+  BarChart3,
+  Calendar,
+  Flag,
+  FileText,
+  Megaphone,
+  Repeat,
+  Calendar as CalendarIcon,
+} from "lucide-react";
 import React, { useState } from "react";
+import StepNavigation from "@/app/components/step-navigation";
+import { useRouter } from "next/navigation";
+import PurposeCard from "./purpose-card";
 
 const PurposePage = () => {
   const purposes = [
@@ -10,21 +21,29 @@ const PurposePage = () => {
       id: 1,
       name: "정보 전달",
       description: "공지사항, 뉴스레터",
+      icon: FileText,
+      color: "blue",
     },
     {
       id: 2,
       name: "홍보 목적",
       description: "이벤트, 할인, 신제품 소식",
+      icon: Megaphone,
+      color: "purple",
     },
     {
       id: 3,
       name: "재구매 유도",
       description: "쿠폰 발송, 혜택 알림",
+      icon: Repeat,
+      color: "green",
     },
     {
       id: 4,
-      name: "이벤트 안",
+      name: "이벤트 안내",
       description: "시즌 이벤트, 행사 초청",
+      icon: CalendarIcon,
+      color: "orange",
     },
   ];
 
@@ -62,6 +81,14 @@ const PurposePage = () => {
   const [selectedKpiIds, setSelectedKpiIds] = useState<number[]>([]);
   const [selectedDate, setSelectedDate] = useState<Date | undefined>(undefined);
 
+  const router = useRouter();
+  const onNext = () => {
+    if (!selectedPurposeId) {
+      return;
+    }
+    router.push("/new/tone");
+  };
+
   return (
     <div className="min-h-screen bg-gray-100 pb-24 flex flex-col items-center">
       <NewTitle
@@ -73,28 +100,20 @@ const PurposePage = () => {
         <div className="flex flex-col gap-4">
           <div className="text-xl font-bold text-gray-600 flex items-center gap-2">
             <Flag className="w-5 h-5 text-main" fill="currentColor" />
-            메시지 발송 목적
+            메시지 발송 목적 <span className="text-main">*</span>
           </div>
           <div className="flex flex-wrap gap-4 justify-center mt-4">
             {purposes.map((purpose) => (
-              <div
+              <PurposeCard
                 key={purpose.id}
-                className={`flex flex-col w-[45%] items-center gap-2 rounded-xl p-6 cursor-pointer border-2 hover:bg-gray-50 ${
-                  selectedPurposeId === purpose.id
-                    ? "border-blue-500 bg-blue-50"
-                    : "border-gray-300 bg-white"
-                }`}
+                purpose={purpose}
+                selected={selectedPurposeId === purpose.id}
                 onClick={() =>
                   selectedPurposeId === purpose.id
                     ? setSelectedPurposeId(null)
                     : setSelectedPurposeId(purpose.id)
                 }
-              >
-                <div>{purpose.name}</div>
-                <div className="text-sm text-gray-500">
-                  {purpose.description}
-                </div>
-              </div>
+              />
             ))}
           </div>
         </div>
@@ -177,6 +196,11 @@ const PurposePage = () => {
           </div>
         </div>
       </div>
+      <StepNavigation
+        onPrevious={() => router.push("/new/persona")}
+        onNext={onNext}
+        nextDisabled={!selectedPurposeId}
+      />
     </div>
   );
 };

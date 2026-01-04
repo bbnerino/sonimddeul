@@ -41,10 +41,39 @@ export default function PersonaCard({
   ];
   const textColor = textColors[persona.id % textColors.length];
   const bgColor = bgColors[persona.id % bgColors.length];
+
+  // 선택 시 색상 매핑
+  const borderColors = [
+    "border-blue-500",
+    "border-green-500",
+    "border-yellow-500",
+    "border-red-500",
+    "border-purple-500",
+    "border-pink-500",
+    "border-orange-500",
+    "border-gray-500",
+  ];
+  const selectedBgColors = [
+    "bg-blue-50",
+    "bg-green-50",
+    "bg-yellow-50",
+    "bg-red-50",
+    "bg-purple-50",
+    "bg-pink-50",
+    "bg-orange-50",
+    "bg-gray-50",
+  ];
+
+  const borderColor = borderColors[persona.id % borderColors.length];
+  const selectedBgColor =
+    selectedBgColors[persona.id % selectedBgColors.length];
+
   return (
     <div
-      className={`w-80 h-90 bg-white rounded-lg p-6 border-2 cursor-pointer ${
-        selected ? "border-2 border-blue-500" : "border-gray-300"
+      className={`w-80 h-90 rounded-lg p-6 border-2 cursor-pointer transition-all hover:shadow-md ${
+        selected
+          ? `${borderColor} ${selectedBgColor}`
+          : "border-gray-300 bg-white hover:border-gray-400"
       }`}
       onClick={onClick}
     >
