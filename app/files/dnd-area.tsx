@@ -68,8 +68,19 @@ export default function DnDArea({ onFilesSelected }: DnDAreaProps) {
             Click to upload or drag and drop
           </p>
           <p className="text-sm text-gray-500">
-            SVG, PNG, JPG, CSV or PDF (max. 800×400px)
+            Excel 파일만 업로드 가능합니다 (XLSX, XLS)
           </p>
+          <div className="mt-3 p-3 bg-yellow-50 border border-yellow-200 rounded-lg max-w-md">
+            <p className="text-xs text-red-600 font-semibold mb-2">
+              * 데이터는 Excel 파일 형식만 지원됩니다
+            </p>
+            <p className="text-xs text-gray-700 font-medium mb-1">
+              필수 포함 항목:
+            </p>
+            <p className="text-xs text-gray-600">
+              no, title, content, CPC, ROAS, CPM, CTR, send_date
+            </p>
+          </div>
         </div>
       </div>
 

@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { ArrowLeft, Upload, MoreVertical, Trash2 } from "lucide-react";
+import { Upload, MoreVertical, Trash2 } from "lucide-react";
 import FileDeleteModal from "./file-delete-modal";
 import DnDArea from "./dnd-area";
 import Link from "next/link";
@@ -44,11 +44,11 @@ export default function FilesPage() {
 
   // 더미 데이터
   const [files, setFiles] = useState<FileItem[]>([
-    { id: 1, name: "Q3_Marketing_Data.csv", date: "Oct 24, 2023" },
-    { id: 2, name: "Brand_Assets_v2.zip", date: "Oct 22, 2023" },
-    { id: 3, name: "Customer_Segment_A.pdf", date: "Oct 20, 2023" },
+    { id: 1, name: "Q3_Marketing_Data.xlsx", date: "Oct 24, 2023" },
+    { id: 2, name: "Customer_Segment_A.xlsx", date: "Oct 22, 2023" },
+    { id: 3, name: "Sales_Report_2023.xlsx", date: "Oct 20, 2023" },
     { id: 4, name: "Q2_Performance_Report.xlsx", date: "Sep 15, 2023" },
-    { id: 5, name: "Logo_Pack_Final.png", date: "Sep 10, 2023" },
+    { id: 5, name: "Customer_Analysis_Data.xlsx", date: "Sep 10, 2023" },
   ]);
 
   const handleFilesSelected = (files: File[]) => {
@@ -71,6 +71,8 @@ export default function FilesPage() {
   };
 
   const handleDeleteCancel = () => {
+    alert("베타 버전에서는 파일 삭제 기능을 사용할 수 없습니다.");
+    return;
     setShowDeleteModal(false);
     setSelectedFile(null);
   };
@@ -78,7 +80,7 @@ export default function FilesPage() {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* 헤더 */}
-      <div className="bg-white border-b border-gray-200 px-[15%] py-4 mx-auto">
+      <div className="bg-white border-b border-gray-200 px-[15%] py-4 mx-auto flex justify-between items-center">
         <button
           onClick={() => router.back()}
           className="flex items-center gap-2 text-gray-600 hover:text-gray-900 mb-4"
@@ -91,28 +93,19 @@ export default function FilesPage() {
           </Link>
         </button>
 
-        <div className="flex items-start justify-between">
-          <div>
-            <h1 className="text-3xl font-bold text-gray-900 mb-2">파일 관리</h1>
-            <p className="text-gray-600">
-              Upload and manage your marketing assets and data sets for AI
-              analysis.
-            </p>
-          </div>
-          <button
-            onClick={() => {
-              // DnDArea는 본문에 있으므로 헤더 버튼은 클릭 시 스크롤 이동
-              const dndArea = document.querySelector("[data-dnd-area]");
-              if (dndArea) {
-                dndArea.scrollIntoView({ behavior: "smooth", block: "start" });
-              }
-            }}
-            className="flex items-center gap-2 bg-main text-white px-4 py-2 rounded-lg hover:bg-main-hover transition-colors"
-          >
-            <Upload className="w-4 h-4" />
-            파일 업로드
-          </button>
-        </div>
+        <button
+          onClick={() => {
+            // DnDArea는 본문에 있으므로 헤더 버튼은 클릭 시 스크롤 이동
+            const dndArea = document.querySelector("[data-dnd-area]");
+            if (dndArea) {
+              dndArea.scrollIntoView({ behavior: "smooth", block: "start" });
+            }
+          }}
+          className="flex items-center gap-2 bg-main text-white px-4 py-2 rounded-lg hover:bg-main-hover transition-colors"
+        >
+          <Upload className="w-4 h-4" />
+          파일 업로드
+        </button>
       </div>
 
       <div className="max-w-7xl mx-auto px-6 py-8">
